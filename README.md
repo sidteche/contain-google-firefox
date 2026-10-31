@@ -16,7 +16,7 @@ Every time you visit Google, it will open in its own container, separate from ot
 
 ## How do I install Google Container?
 
-This version is installed from a file instead of from the Firefox Add-ons website. If you have the Google Container add-on from the Add-ons website, disable or remove it first, since both use the same add-on ID.
+This version is installed from a file instead of from the Firefox Add-ons website. If you have the Google Container add-on from the Add-ons website, disable or remove it first so the two don't both reopen tabs. This version has its own add-on ID (`google-container@sidteche`), so its settings are separate from the original's.
 
 ### 1. Build the add-on file
 
@@ -52,7 +52,7 @@ Regular Firefox only installs add-ons that Mozilla has signed, so pick one of th
 
 **Keep it installed (regular Firefox)**
 
-1. Get the file signed by Mozilla without publishing it: on the Firefox Add-on Developer Hub, submit a new add-on, choose **On your own** and upload `google-container.xpi`. Before uploading, change `id` in `manifest.json` to your own, for example `google-container@yourname`, since `@contain-google` belongs to the original add-on.
+1. Get the file signed by Mozilla without publishing it: on the Firefox Add-on Developer Hub, submit a new add-on, choose **On your own** and upload `google-container.xpi`. If you're signing your own copy of this repository, first change `id` in `manifest.json` to one of your own, for example `google-container@yourname`, since an ID can only be signed by one Mozilla account.
 2. Download the signed `.xpi` once it's approved (usually within minutes).
 3. Open `about:addons`, click the gear icon, choose **Install Add-on From File…** and select the signed file.
 
