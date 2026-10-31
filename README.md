@@ -14,13 +14,54 @@ The Add-on keeps Google in a separate Container to prevent it from following you
 
 Every time you visit Google, it will open in its own container, separate from other websites you visit.  You can login to Google within its container.  When browsing outside the container, Google won’t be able to easily collect your browsing data and connect it to your Google identity.
 
-## How do I enable Google Container?
+## How do I install Google Container?
 
-We’ve made it easy to take steps to protect your privacy so you can go on with your day.
+This version is installed from a file instead of from the Firefox Add-ons website. If you have the Google Container add-on from the Add-ons website, disable or remove it first, since both use the same add-on ID.
 
-1. [Install Google Container](https://addons.mozilla.org/firefox/addon/google-container/). This will log you out of Google and delete the cookies it’s been using to track you.
-2. Open Google and use it like you normally would.  Firefox will automatically switch to the Google Container tab for you.
-3. If you click on a link to a page outside of Google or type in another website in the address bar, Firefox will load them outside of the Google Container
+### 1. Build the add-on file
+
+Download this repository (**Code** > **Download ZIP**) and extract it, or clone it. Then pack the add-on files into `google-container.xpi`. The files must be at the top level of the archive, not inside a folder.
+
+On Windows (PowerShell), from the repository folder:
+
+```powershell
+Compress-Archive -Path manifest.json, background.js, options.html, options.js, icon.png, icon@2x.png -DestinationPath google-container.zip -Force
+Move-Item google-container.zip google-container.xpi -Force
+```
+
+On macOS or Linux, from the repository folder:
+
+```bash
+zip google-container.xpi manifest.json background.js options.html options.js icon.png icon@2x.png
+```
+
+### 2. Install it in Firefox
+
+Regular Firefox only installs add-ons that Mozilla has signed, so pick one of these:
+
+**Try it out (any Firefox, removed when Firefox restarts)**
+
+1. Open `about:debugging#/runtime/this-firefox`.
+2. Click **Load Temporary Add-on…** and select `manifest.json` (or `google-container.xpi`).
+
+**Keep it installed (Firefox Developer Edition, Nightly or ESR)**
+
+1. Open `about:config`, accept the warning, and set `xpinstall.signatures.required` to `false`.
+2. Open `about:addons`, click the gear icon, and choose **Install Add-on From File…**.
+3. Select `google-container.xpi` and click **Add**.
+
+**Keep it installed (regular Firefox)**
+
+1. Get the file signed by Mozilla without publishing it: on the Firefox Add-on Developer Hub, submit a new add-on, choose **On your own** and upload `google-container.xpi`. Before uploading, change `id` in `manifest.json` to your own, for example `google-container@yourname`, since `@contain-google` belongs to the original add-on.
+2. Download the signed `.xpi` once it's approved (usually within minutes).
+3. Open `about:addons`, click the gear icon, choose **Install Add-on From File…** and select the signed file.
+
+## How do I use Google Container?
+
+1. After installing, the add-on logs you out of Google in your normal tabs and deletes the cookies Google uses to track you.
+2. Open Google and use it like you normally would. Firefox will automatically switch to the Google Container tab for you.
+3. If you click on a link to a page outside of Google or type in another website in the address bar, Firefox will load them outside of the Google Container.
+4. To change settings, open `about:addons`, click **Google Container** and go to **Preferences**.
 
 ## How does this affect Google’s features?
 
